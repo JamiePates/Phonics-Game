@@ -1,0 +1,252 @@
+
+<head>
+<title>Soft 131 - Phonics</title>
+<style type="text/css">
+
+body{
+	background-color: #eee;
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size: 11px;
+}
+h3{
+	font-weight:normal;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	color: #69C;
+}
+#page-wrap{
+	width: 1000px;
+	margin: 0 auto 0 auto;
+}
+#feedback{
+	border:solid 1px #ccc;
+	width: 300px;
+	height: 20px;
+	line-height: 20px;
+	color: #69c;
+}
+.content{
+	width: 600px;
+	height: 300px;
+	background-color: fff;
+	padding: 25px;
+	margin: 25px;
+	border: solid 1px #ccc;
+}
+
+</style>
+</head>
+<body><div align="center">
+<div class="content">
+<h3>Soft131: Phonics</h3>
+<input id="btnStart" type="button" value="Start" onClick="btnStart_onClick()"/><br/><br/>
+<input id="btnA" type="button" value="A" disabled="true" onClick="btnA_onClick()"/>
+<input id="btnE" type="button" value="E" disabled="true" onClick="btnE_onClick()"/>
+<input id="btnI" type="button" value="I" disabled="true" onClick="btnI_onClick()"/>
+<input id="btnO" type="button" value="O" disabled="true" onClick="btnO_onClick()"/>
+<input id="btnU" type="button" value="U" disabled="true" onClick="btnU_onClick()"/>
+<input id="btnB" type="button" value="B" disabled="true" onClick="btnB_onClick()"/>
+<input id="btnH" type="button" value="H" disabled="true" onClick="btnH_onClick()"/>
+<input id="btnT" type="button" value="T" disabled="true" onClick="btnT_onClick()"/>
+
+<p id="feedback"> </p>
+
+<p>Collect all five stars to win</p>
+
+<img id="Star1" src="images/StarOff.gif"/>
+<img id="Star2" src="images/StarOff.gif"/>
+<img id="Star3" src="images/StarOff.gif"/>
+<img id="Star4" src="images/StarOff.gif"/>
+<img id="Star5" src="images/StarOff.gif"/>
+
+<object id="sndPlayer" classid="clsid:6BF52A52-394A-11d3-B153-00C04F79FAA6"style="width:0px; height:0px;"> </object>
+
+</div></div></body>
+</html>
+
+<script language="javascript">
+var Button = new Array (8);
+var Repeat = new Array (9);
+var Rand = new Array (2);
+var StarCount;
+var r;
+var n;
+var i;
+var x;
+
+Button[1] = "A";
+Button[2] = "E";
+Button[3] = "I";
+Button[4] = "O";
+Button[5] = "U";
+Button[6] = "B";
+Button[7] = "H";
+Button[8] = "T";
+Rand[1] = "Girl";
+Rand[2] = "Boy";
+StarCount = 0;
+x = 0;
+r = 1;
+function btnStart_onClick(){
+	btnStart.value="Play";
+	n = 1 + parseInt(Math.random() * 8); 		
+	i = 1 + parseInt(Math.random() * 2); 		
+for (x = 1; x <= 8; x++){ 
+	if(Repeat[x] == n){							
+	n = 1 + parseInt(Math.random() * 8);
+	x = 0;}
+}
+if(r<8){
+	Repeat[r]= n;
+	r = r + 1;}
+else{
+	r = 1;
+	Repeat[r]= n;}
+	
+	sndPlayer.URL = "audio/"+Rand[i]+Button[n]+".wav";
+	feedback.innerHTML=" ";
+	btnStart.disabled=true;
+	btnA.disabled=false;
+	btnE.disabled=false;
+	btnI.disabled=false;
+	btnO.disabled=false;
+	btnU.disabled=false;
+	btnB.disabled=false;
+	btnH.disabled=false;
+	btnT.disabled=false;
+	color();
+}
+function btnA_onClick(){
+		if (n == 1)
+		{btnA.style.backgroundColor = '#72cc66'
+		correct();}
+		else{
+		btnA.style.backgroundColor = '#cc6666';
+		incorrect();}
+}
+function btnE_onClick(){
+		if (n == 2)
+		{btnE.style.backgroundColor = '#72cc66';
+		correct();}
+		else
+		{btnE.style.backgroundColor = '#cc6666';
+		incorrect();}
+}
+function btnI_onClick(){
+		if (n == 3)
+		{btnI.style.backgroundColor = '#72cc66';
+		correct();}
+		else
+		{btnI.style.backgroundColor = '#cc6666';
+		incorrect();}
+}
+function btnO_onClick(){
+		if (n == 4)
+		{btnO.style.backgroundColor = '#72cc66';
+		correct();}
+		else{
+		btnO.style.backgroundColor = '#cc6666';
+		incorrect();}
+}
+function btnU_onClick(){
+		if (n == 5)
+		{btnU.style.backgroundColor = '#72cc66';
+		correct();}
+		else
+		{btnU.style.backgroundColor = '#cc6666';
+		incorrect();}
+}
+function btnB_onClick(){
+		if (n == 6)
+		{btnB.style.backgroundColor = '#72cc66';
+		correct();}
+		else
+		{btnB.style.backgroundColor = '#cc6666';
+		incorrect();}
+}
+function btnH_onClick(){
+		if (n == 7)
+		{btnH.style.backgroundColor = '#72cc66';
+		correct();}
+		else
+		{btnH.style.backgroundColor = '#cc6666';
+		incorrect();}
+}
+function btnT_onClick(){
+		if (n == 8)
+		{btnT.style.backgroundColor = '#72cc66';
+		correct();}
+		else
+		{btnT.style.backgroundColor = '#cc6666';
+		incorrect();}		
+}
+	function starcounter(){
+	if (StarCount == 1) {
+		Star1.src= "images/StarOn.gif";
+}
+	if (StarCount == 2) {
+		Star2.src="images/StarOn.gif";
+}
+	if (StarCount == 3) {
+		Star3.src="images/StarOn.gif";
+}
+	if (StarCount == 4) {
+		Star4.src="images/StarOn.gif";
+}
+	if (StarCount == 5) {
+		Star5.src="images/StarOn.gif";
+		alert ("Congratulations, you win the game");
+		feedback.innerHTML="You win, press start to play again";
+		StarCount = 0;
+		Repeat[1] = "";
+		Repeat[2] = "";
+		Repeat[3] = "";
+		Repeat[4] = "";
+		Repeat[5] = "";
+		Repeat[6] = "";
+		Repeat[7] = "";
+		Repeat[8] = "";
+		r= 1;
+}
+	if (StarCount == 0) {
+		Star1.src= "images/StarOff.gif";
+		Star2.src= "images/StarOff.gif";
+		Star3.src= "images/StarOff.gif";
+		Star4.src= "images/StarOff.gif";
+		Star5.src= "images/StarOff.gif";
+		color();
+		btnStart.value="Start";}
+}
+	function disable(){
+		btnA.disabled=true;
+		btnE.disabled=true;
+		btnI.disabled=true;
+		btnO.disabled=true;
+		btnU.disabled=true;
+		btnB.disabled=true;
+		btnH.disabled=true;
+		btnT.disabled=true;
+}
+	function color(){
+		btnA.style.backgroundColor = "#FFFFFF";
+		btnE.style.backgroundColor = "#FFFFFF";
+		btnI.style.backgroundColor = "#FFFFFF";
+		btnO.style.backgroundColor = "#FFFFFF";
+		btnU.style.backgroundColor = "#FFFFFF";
+		btnB.style.backgroundColor = "#FFFFFF";
+		btnH.style.backgroundColor = "#FFFFFF";
+		btnT.style.backgroundColor = "#FFFFFF";
+}
+	function correct(){
+		feedback.innerHTML = "Correct, press Play to try the next one";
+		sndPlayer.URL = "audio/"+Rand[i]+Button[n]+".wav";
+		StarCount = parseInt(StarCount) + parseInt(1);
+		btnStart.disabled=false;
+		disable();
+		starcounter();
+}
+	function incorrect(){
+		feedback.innerHTML = "Incorrect, the correct answer was <b>" + Button[n] + "</b>";
+		sndPlayer.URL = "audio/"+Rand[i]+Button[n]+".wav";
+		document.getElementById("btn" + Button[n]).style.backgroundColor = '#72cc66'
+		StarCount = parseInt(StarCount) - parseInt(1);}	
+</script>
